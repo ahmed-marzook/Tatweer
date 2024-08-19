@@ -9,6 +9,6 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <!-- Include all SQL files from the 'sql_changesets' directory -->
-    <includeAll path="db/changelog/changesets/" relativeToChangelogFile="true"/>
+    <includeAll path="db/changelog/changesets/"/>
 
 </databaseChangeLog>
