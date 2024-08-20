@@ -3,12 +3,17 @@ package com.al_najah.tatweer.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
-
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "habits")
 public class Habit {
@@ -24,13 +29,15 @@ public class Habit {
   @JoinColumn(name = "user_id", nullable = false)
   private User user;
 
+  @CreationTimestamp
+  @Column(nullable = false, updatable = false)
   private LocalDateTime startDate;
 
-  @CreatedDate
+  @CreationTimestamp
   @Column(nullable = false, updatable = false)
   private LocalDateTime createdAt;
 
-  @LastModifiedDate
+  @UpdateTimestamp
   @Column(nullable = false)
   private LocalDateTime updatedAt;
 }
