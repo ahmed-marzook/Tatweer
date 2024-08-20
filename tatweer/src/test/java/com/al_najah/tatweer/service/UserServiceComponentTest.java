@@ -7,8 +7,15 @@ import com.al_najah.tatweer.dto.UserRecord;
 import com.al_najah.tatweer.entity.User;
 import com.al_najah.tatweer.repository.UserRepository;
 import java.util.Optional;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.support.TransactionTemplate;
 
 public class UserServiceComponentTest extends BaseComponentTest {
 
