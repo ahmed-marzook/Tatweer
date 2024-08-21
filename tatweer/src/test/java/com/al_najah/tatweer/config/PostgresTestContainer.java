@@ -2,7 +2,6 @@ package com.al_najah.tatweer.config;
 
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
 
 public class PostgresTestContainer {
 
