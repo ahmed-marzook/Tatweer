@@ -3,7 +3,7 @@ package com.al_najah.tatweer.service;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.al_najah.tatweer.config.BaseComponentTest;
-import com.al_najah.tatweer.dto.UserRecord;
+import com.al_najah.tatweer.dto.user.UserCreateDTO;
 import com.al_najah.tatweer.entity.User;
 import com.al_najah.tatweer.repository.UserRepository;
 import java.util.Optional;
@@ -18,10 +18,10 @@ public class UserServiceComponentTest extends BaseComponentTest {
 
   @Test
   void testCreateUser() {
-    UserRecord userRecord =
-        new UserRecord("testuser", "Ahmed", "Marzook", "test@example.com", null);
+    UserCreateDTO userCreateDTO =
+        new UserCreateDTO("testuser", "Ahmed", "Marzook", "test@example.com");
 
-    userService.addNewUser(userRecord);
+    userService.addNewUser(userCreateDTO);
     Optional<User> user = userRepository.findByEmail("test@example.com");
 
     assertTrue(user.isPresent());

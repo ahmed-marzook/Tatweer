@@ -1,5 +1,6 @@
-package com.al_najah.tatweer.dto;
+package com.al_najah.tatweer.dto.user;
 
+import com.al_najah.tatweer.dto.habit.HabitRecord;
 import java.util.List;
 
 public record UserRecord(

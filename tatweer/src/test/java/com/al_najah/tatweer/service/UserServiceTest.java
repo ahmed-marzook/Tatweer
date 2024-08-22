@@ -1,11 +1,15 @@
 package com.al_najah.tatweer.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
-import com.al_najah.tatweer.dto.UserRecord;
+import com.al_najah.tatweer.dto.user.UserCreateDTO;
+import com.al_najah.tatweer.entity.User;
+import com.al_najah.tatweer.exceptions.EntityAlreadyExistsException;
 import com.al_najah.tatweer.repository.UserRepository;
+import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 public class UserServiceTest {
@@ -20,11 +24,45 @@ public class UserServiceTest {
   }
 
   @Test
-  void addNewUser() {
-    UserRecord userRecord = new UserRecord("Test", "Test", "testLast", "test@email.com", null);
+  void addNewUser_ShouldSaveUserAndReturnUUID() {
+    UserCreateDTO userCreateDTO = new UserCreateDTO("john.doe", "John", "Doe", "john@example.com");
+    User savedUser =
+        User.builder()
+            .email(userCreateDTO.email())
+            .firstName(userCreateDTO.firstName())
+            .lastName(userCreateDTO.lastName())
+            .username(userCreateDTO.userName())
+            .userUuid(UUID.randomUUID())
+            .build();
 
-    userService.addNewUser(userRecord);
+    when(userRepository.save(any(User.class))).thenReturn(savedUser);
 
-    verify(userRepository).save(any());
+    UUID result = userService.addNewUser(userCreateDTO);
+
+    assertThat(result).isNotNull().isEqualTo(savedUser.getUserUuid());
+  }
+
+  @Test
+  void addNewUser_ShouldThrowUsernameAlreadyExistsException() {
+    UserCreateDTO userCreateDTO =
+        new UserCreateDTO("existing_user", "John", "Doe", "john@example.com");
+    when(userRepository.existsByUsername(userCreateDTO.userName())).thenReturn(true);
+
+    assertThatThrownBy(() -> userService.addNewUser(userCreateDTO))
+        .isInstanceOf(EntityAlreadyExistsException.class)
+        .hasMessage(
+            "The username you provided (existing_user) is already in use. Please provide a different username to proceed.");
+  }
+
+  @Test
+  void addNewUser_ShouldThrowEmailAlreadyExistsException() {
+    UserCreateDTO userCreateDTO =
+        new UserCreateDTO("john.doe", "John", "Doe", "existing@example.com");
+    when(userRepository.existsByEmail(userCreateDTO.email())).thenReturn(true);
+
+    assertThatThrownBy(() -> userService.addNewUser(userCreateDTO))
+        .isInstanceOf(EntityAlreadyExistsException.class)
+        .hasMessage(
+            "The email you provided (existing@example.com) is already in use. Please provide a different email to proceed.");
   }
 }

@@ -5,6 +5,7 @@
 
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
+    user_uuid UUID UNIQUE NOT NULL,
     username VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(50) NOT NULL UNIQUE,
     first_name VARCHAR(50) NOT NULL,
