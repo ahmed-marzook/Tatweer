@@ -3,6 +3,7 @@ package com.al_najah.tatweer.controller;
 import com.al_najah.tatweer.dto.ApiErrorResponse;
 import com.al_najah.tatweer.dto.ApiValidationErrorResponse;
 import com.al_najah.tatweer.exceptions.EntityAlreadyExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,18 @@ public class GlobalExceptionHandler {
             request.getDescription(false),
             ex.getMessage());
     return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+  }
+
+  @ExceptionHandler(EntityNotFoundException.class)
+  public ResponseEntity<ApiErrorResponse> handleEntityNotFoundException(
+      EntityNotFoundException ex, WebRequest request) {
+    ApiErrorResponse errorResponse =
+        new ApiErrorResponse(
+            HttpStatus.NOT_FOUND.value(),
+            LocalDateTime.now(),
+            request.getDescription(false),
+            ex.getMessage());
+    return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
   }
 
   @ExceptionHandler(Exception.class)

@@ -39,7 +39,7 @@ public class UserControllerTest {
 
     mockMvc
         .perform(
-            post("/api/users")
+            post("/api/user")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(userCreateDTO)))
         .andExpect(status().isCreated())
@@ -53,13 +53,13 @@ public class UserControllerTest {
 
     mockMvc
         .perform(
-            post("/api/users")
+            post("/api/user")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(userCreateDTO)))
         .andExpect(status().isUnprocessableEntity())
         .andExpect(jsonPath("$.statusCode").value(422))
         .andExpect(jsonPath("$.timeStamp").exists())
-        .andExpect(jsonPath("$.path").value("uri=/api/users"))
+        .andExpect(jsonPath("$.path").value("uri=/api/user"))
         .andExpect(jsonPath("$.message").value("Validation failed"))
         .andExpect(jsonPath("$.errors", hasSize(8)))
         .andExpect(
@@ -94,13 +94,13 @@ public class UserControllerTest {
 
     mockMvc
         .perform(
-            post("/api/users")
+            post("/api/user")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(userCreateDTO)))
         .andExpect(status().isUnprocessableEntity())
         .andExpect(jsonPath("$.statusCode").value(422))
         .andExpect(jsonPath("$.timeStamp").exists())
-        .andExpect(jsonPath("$.path").value("uri=/api/users"))
+        .andExpect(jsonPath("$.path").value("uri=/api/user"))
         .andExpect(jsonPath("$.message").value("Validation failed"))
         .andExpect(jsonPath("$.errors", hasSize(1)))
         .andExpect(jsonPath("$.errors[0].field").value("userName"))
@@ -115,13 +115,13 @@ public class UserControllerTest {
 
     mockMvc
         .perform(
-            post("/api/users")
+            post("/api/user")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(userCreateDTO)))
         .andExpect(status().isUnprocessableEntity())
         .andExpect(jsonPath("$.statusCode").value(422))
         .andExpect(jsonPath("$.timeStamp").exists())
-        .andExpect(jsonPath("$.path").value("uri=/api/users"))
+        .andExpect(jsonPath("$.path").value("uri=/api/user"))
         .andExpect(jsonPath("$.message").value("Validation failed"))
         .andExpect(jsonPath("$.errors", hasSize(1)))
         .andExpect(jsonPath("$.errors[0].field").value("userName"))
@@ -138,13 +138,13 @@ public class UserControllerTest {
 
     mockMvc
         .perform(
-            post("/api/users")
+            post("/api/user")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(userCreateDTO)))
         .andExpect(status().isInternalServerError())
         .andExpect(jsonPath("$.statusCode").value(500))
         .andExpect(jsonPath("$.timeStamp").exists())
-        .andExpect(jsonPath("$.path").value("uri=/api/users"))
+        .andExpect(jsonPath("$.path").value("uri=/api/user"))
         .andExpect(jsonPath("$.message").value("Username 'existinguser' is already taken"));
   }
 
@@ -159,13 +159,13 @@ public class UserControllerTest {
 
     mockMvc
         .perform(
-            post("/api/users")
+            post("/api/user")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(userCreateDTO)))
         .andExpect(status().isInternalServerError())
         .andExpect(jsonPath("$.statusCode").value(500))
         .andExpect(jsonPath("$.timeStamp").exists())
-        .andExpect(jsonPath("$.path").value("uri=/api/users"))
+        .andExpect(jsonPath("$.path").value("uri=/api/user"))
         .andExpect(
             jsonPath("$.message").value("Email 'existing@example.com' is already registered"));
   }
@@ -180,13 +180,13 @@ public class UserControllerTest {
 
     mockMvc
         .perform(
-            post("/api/users")
+            post("/api/user")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(userCreateDTO)))
         .andExpect(status().isInternalServerError())
         .andExpect(jsonPath("$.statusCode").value(500))
         .andExpect(jsonPath("$.timeStamp").exists())
-        .andExpect(jsonPath("$.path").value("uri=/api/users"))
+        .andExpect(jsonPath("$.path").value("uri=/api/user"))
         .andExpect(jsonPath("$.message").value("Unexpected error occurred"));
   }
 }

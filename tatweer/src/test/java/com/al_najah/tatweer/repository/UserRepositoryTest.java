@@ -46,4 +46,22 @@ public class UserRepositoryTest extends BaseRepositoryTest {
 
     assertTrue(emailExist);
   }
+
+  @Test
+  void findUserByUserUuid_valid() {
+    Optional<User> userActual =
+        userRepository.findByUserUuid(UUID.fromString("123e4567-e89b-12d3-a456-426614174000"));
+
+    assertThat(userActual)
+        .isPresent()
+        .hasValueSatisfying(
+            u -> {
+              assertThat(u.getUsername()).isEqualTo("superMario");
+              assertThat(u.getFirstName()).isEqualTo("Mario");
+              assertThat(u.getLastName()).isEqualTo("Mario");
+              assertThat(u.getEmail()).isEqualTo("mario@mushroom.kingdom");
+              assertThat(u.getUserUuid())
+                  .isEqualTo(UUID.fromString("123e4567-e89b-12d3-a456-426614174000"));
+            });
+  }
 }

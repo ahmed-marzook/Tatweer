@@ -17,7 +17,10 @@ CREATE TABLE users (
 CREATE TABLE habits (
     habit_id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL,
-    name VARCHAR(50) NOT NULL,
+    title VARCHAR(50) NOT NULL,
+    description VARCHAR(500) NULL,
+    habit_frequency_type VARCHAR(10) NOT NULL,
+    frequency INT NULL,
     start_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

@@ -1,5 +1,6 @@
 package com.al_najah.tatweer.entity;
 
+import com.al_najah.tatweer.enums.HabitFrequencyType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
@@ -19,11 +20,16 @@ import org.hibernate.annotations.UpdateTimestamp;
 public class Habit {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long habit_id;
+  private Long habitId;
 
-  @NotBlank private String name;
+  @NotBlank private String title;
 
   private String description;
+
+  @Convert(converter = HabitFrequencyType.Converter.class)
+  private HabitFrequencyType habitFrequencyType;
+
+  private Integer frequency;
 
   @ManyToOne
   @JoinColumn(name = "user_id", nullable = false)
