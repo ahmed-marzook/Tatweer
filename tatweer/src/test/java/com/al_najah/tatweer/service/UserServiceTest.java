@@ -51,7 +51,7 @@ public class UserServiceTest {
     assertThatThrownBy(() -> userService.addNewUser(userCreateDTO))
         .isInstanceOf(EntityAlreadyExistsException.class)
         .hasMessage(
-            "The username you provided (existing_user) is already in use. Please provide a different username to proceed.");
+            "Username 'existing_user' is already taken. Please provide a different username to proceed.");
   }
 
   @Test
@@ -63,6 +63,6 @@ public class UserServiceTest {
     assertThatThrownBy(() -> userService.addNewUser(userCreateDTO))
         .isInstanceOf(EntityAlreadyExistsException.class)
         .hasMessage(
-            "The email you provided (existing@example.com) is already in use. Please provide a different email to proceed.");
+            "Email 'existing@example.com' is already registered. Please provide a different email to proceed.");
   }
 }

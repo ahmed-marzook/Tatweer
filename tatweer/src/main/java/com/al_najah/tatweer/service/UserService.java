@@ -18,10 +18,16 @@ public class UserService {
   @Transactional
   public UUID addNewUser(UserCreateDTO userCreateDTO) {
     if (userRepository.existsByUsername(userCreateDTO.userName())) {
-      throw new EntityAlreadyExistsException(String.format("Username '%s' is already taken. Please provide a different username to proceed.", userCreateDTO.userName()));
+      throw new EntityAlreadyExistsException(
+          String.format(
+              "Username '%s' is already taken. Please provide a different username to proceed.",
+              userCreateDTO.userName()));
     }
     if (userRepository.existsByEmail(userCreateDTO.email())) {
-      throw new EntityAlreadyExistsException(String.format("Email '%s' is already registered. Please provide a different email to proceed.", userCreateDTO.email()));
+      throw new EntityAlreadyExistsException(
+          String.format(
+              "Email '%s' is already registered. Please provide a different email to proceed.",
+              userCreateDTO.email()));
     }
     User newUser =
         User.builder()
