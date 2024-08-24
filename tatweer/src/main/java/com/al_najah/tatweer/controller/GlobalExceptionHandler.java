@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -62,6 +63,18 @@ public class GlobalExceptionHandler {
             request.getDescription(false),
             ex.getMessage());
     return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+  }
+
+  @ExceptionHandler({IllegalArgumentException.class, HttpMessageNotReadableException.class})
+  public ResponseEntity<ApiErrorResponse> handleIllegalArgumentException(
+          IllegalArgumentException ex, WebRequest request) {
+    ApiErrorResponse errorResponse =
+            new ApiErrorResponse(
+                    HttpStatus.BAD_REQUEST.value(),
+                    LocalDateTime.now(),
+                    request.getDescription(false),
+                    ex.getMessage());
+    return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
   }
 
   @ExceptionHandler(Exception.class)

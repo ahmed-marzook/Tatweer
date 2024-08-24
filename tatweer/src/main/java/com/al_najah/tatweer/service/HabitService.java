@@ -19,7 +19,7 @@ public class HabitService {
     this.userRepository = userRepository;
   }
 
-  public Long createHabit(HabitRequestRecord habitRequestRecord, UUID uuid) {
+  public Habit createHabit(HabitRequestRecord habitRequestRecord, UUID uuid) {
     User user =
         userRepository
             .findByUserUuid(uuid)
@@ -33,6 +33,6 @@ public class HabitService {
             .frequency(habitRequestRecord.frequencyCount())
             .user(user)
             .build();
-    return habitRepository.save(habit).getHabitId();
+    return habitRepository.save(habit);
   }
 }
