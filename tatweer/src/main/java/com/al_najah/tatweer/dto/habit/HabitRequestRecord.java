@@ -1,7 +1,11 @@
 package com.al_najah.tatweer.dto.habit;
 
 import com.al_najah.tatweer.enums.HabitFrequencyType;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public record HabitRequestRecord(
     @NotBlank(message = "Habit name is required")

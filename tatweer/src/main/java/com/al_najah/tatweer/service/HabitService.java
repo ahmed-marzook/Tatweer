@@ -35,4 +35,28 @@ public class HabitService {
             .build();
     return habitRepository.save(habit);
   }
+
+  public void deleteHabit(Long habitId, UUID uuid) {
+    User user =
+        userRepository
+            .findByUserUuid(uuid)
+            .orElseThrow(() -> new EntityNotFoundException("User not found with UUID: " + uuid));
+    habitRepository.deleteById(habitId);
+  }
+
+  public Habit updateHabit(HabitRequestRecord habitRequestRecord, Long habitId, UUID uuid) {
+    userRepository
+        .findByUserUuid(uuid)
+        .orElseThrow(() -> new EntityNotFoundException("User not found with UUID: " + uuid));
+    Habit habit =
+        habitRepository
+            .findById(habitId)
+            .orElseThrow(() -> new EntityNotFoundException("Habit not found with ID: " + habitId));
+
+    habit.setTitle(habitRequestRecord.title());
+    habit.setDescription(habitRequestRecord.description());
+    habit.setHabitFrequencyType(habitRequestRecord.habitFrequencyType());
+    habit.setFrequency(habitRequestRecord.frequencyCount());
+    return habitRepository.save(habit);
+  }
 }

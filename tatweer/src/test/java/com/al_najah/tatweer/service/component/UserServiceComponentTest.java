@@ -1,4 +1,4 @@
-package com.al_najah.tatweer.service;
+package com.al_najah.tatweer.service.component;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,6 +6,7 @@ import com.al_najah.tatweer.config.BaseComponentTest;
 import com.al_najah.tatweer.dto.user.UserCreateDTO;
 import com.al_najah.tatweer.entity.User;
 import com.al_najah.tatweer.repository.UserRepository;
+import com.al_najah.tatweer.service.UserService;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
