@@ -67,13 +67,13 @@ public class GlobalExceptionHandler {
 
   @ExceptionHandler({IllegalArgumentException.class, HttpMessageNotReadableException.class})
   public ResponseEntity<ApiErrorResponse> handleIllegalArgumentException(
-          IllegalArgumentException ex, WebRequest request) {
+      IllegalArgumentException ex, WebRequest request) {
     ApiErrorResponse errorResponse =
-            new ApiErrorResponse(
-                    HttpStatus.BAD_REQUEST.value(),
-                    LocalDateTime.now(),
-                    request.getDescription(false),
-                    ex.getMessage());
+        new ApiErrorResponse(
+            HttpStatus.BAD_REQUEST.value(),
+            LocalDateTime.now(),
+            request.getDescription(false),
+            ex.getMessage());
     return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
   }
 
