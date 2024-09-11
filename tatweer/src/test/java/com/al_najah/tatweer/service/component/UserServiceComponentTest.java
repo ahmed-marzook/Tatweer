@@ -1,5 +1,6 @@
 package com.al_najah.tatweer.service.component;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.al_najah.tatweer.config.BaseComponentTest;
@@ -25,8 +26,11 @@ public class UserServiceComponentTest extends BaseComponentTest {
     userService.addNewUser(userCreateDTO);
     Optional<User> user = userRepository.findByEmail("test@example.com");
 
-    assertTrue(user.isPresent());
-    assertEquals("testuser", user.get().getUsername());
-    assertEquals("test@example.com", user.get().getEmail());
+    assertThat(user)
+            .isPresent()
+            .hasValueSatisfying(u -> {
+              assertThat(u.getUsername()).isEqualTo("testuser");
+              assertThat(u.getEmail()).isEqualTo("test@example.com");
+            });
   }
 }

@@ -1,4 +1,4 @@
-INSERT INTO users 
+INSERT INTO users
 (created_at, email, first_name, last_name, updated_at, user_uuid, username)
 VALUES
 ('2022-01-15 10:30:00', 'mario@mushroom.kingdom', 'Mario', 'Mario', '2022-03-20 14:45:00', '123e4567-e89b-12d3-a456-426614174000', 'superMario'),

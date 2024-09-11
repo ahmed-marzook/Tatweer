@@ -37,7 +37,6 @@ public class HabitService {
   }
 
   public void deleteHabit(Long habitId, UUID uuid) {
-    User user =
         userRepository
             .findByUserUuid(uuid)
             .orElseThrow(() -> new EntityNotFoundException("User not found with UUID: " + uuid));

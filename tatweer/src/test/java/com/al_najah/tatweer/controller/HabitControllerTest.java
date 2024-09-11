@@ -71,7 +71,7 @@ public class HabitControllerTest {
   @Test
   void updateHabit_Success() throws Exception {
     UUID userUuid = UUID.randomUUID();
-    Long habitId = 1L;
+    long habitId = 1L;
     User user = new User();
     HabitRequestRecord habitRequest =
         new HabitRequestRecord(
@@ -105,7 +105,7 @@ public class HabitControllerTest {
   @Test
   void deleteHabit_Success() throws Exception {
     UUID userUuid = UUID.randomUUID();
-    Long habitId = 1L;
+    long habitId = 1L;
 
     mockMvc
         .perform(delete("/api/habit/" + habitId).header("User-UUID", userUuid.toString()))
@@ -156,7 +156,7 @@ public class HabitControllerTest {
   @Test
   void updateHabit_EntityNotFound() throws Exception {
     UUID userUuid = UUID.randomUUID();
-    Long habitId = 1L;
+    long habitId = 1L;
     HabitRequestRecord habitRequest =
         new HabitRequestRecord("Updated Habit", "Description", HabitFrequencyType.DAILY, 1);
 
